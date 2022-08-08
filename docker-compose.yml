@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  nuxt:
+    build: ./nuxt
+    ports:
+      - 9001:3000
+    volumes:
+      - ./nuxt/src:/nuxt
+    working_dir: /nuxt
+    command: npm run dev
