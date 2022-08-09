@@ -10,3 +10,4 @@
   `$ docker-compose run --rm nuxt npm install`
 1. 起動  
   `$ docker-compose up`
+1. ブラウザからlocalhost:9001にアクセス  
