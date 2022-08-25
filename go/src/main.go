@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"main/config"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -23,7 +25,7 @@ func main() {
 func createMux() *echo.Echo {
 	m, err := migrate.New(
 		"file://migration",
-		"postgres://postgres:password@db:5432/docker-nuxt?sslmode=disable",
+		fmt.Sprintf("postgres://%v:%v@db:%v/%v?sslmode=disable", config.POSTGRES_USER, config.POSTGRES_PASSWORD, config.POSTGRES_PORT, config.POSTGRES_DB),
 	)
 	if err != nil {
 		panic(err)
