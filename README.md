@@ -18,3 +18,4 @@
 1. `go mod download`
 1. `go mod tidy`
 1. `exit`
+1. `docker-compose run --rm go go get github.com/golang-migrate/migrate/v4/database/postgres`
