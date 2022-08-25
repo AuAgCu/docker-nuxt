@@ -16,7 +16,7 @@ require (
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.1 // indirect
-	go.uber.org/atomic v1.7.0 // indirect
+	go.uber.org/atomic v1.10.0 // indirect
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
 	golang.org/x/net v0.0.0-20220225172249-27dd8689420f // indirect
 	golang.org/x/sys v0.0.0-20220317061510-51cd9980dadf // indirect
