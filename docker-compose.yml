@@ -8,3 +8,12 @@ services:
       - ./nuxt/src:/nuxt
     working_dir: /nuxt
     command: npm run dev
+
+  go:
+    build: ./go
+    command: go run main.go
+    volumes:
+      - ./go/src:/go
+    working_dir: /go
+    ports:
+      - "8080:8080"
