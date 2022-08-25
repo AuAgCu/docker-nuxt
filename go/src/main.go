@@ -23,7 +23,7 @@ func main() {
 func createMux() *echo.Echo {
 	m, err := migrate.New(
 		"file://migration",
-		"postgres://postgres:password@db:5432?sslmode=disable",
+		"postgres://postgres:password@db:5432/docker-nuxt?sslmode=disable",
 	)
 	if err != nil {
 		panic(err)
