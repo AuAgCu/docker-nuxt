@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
+	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -20,6 +21,20 @@ func main() {
 }
 
 func createMux() *echo.Echo {
+	m, err := migrate.New(
+		"file://migration",
+		"postgres://postgres:password@db:5432?sslmode=disable",
+	)
+	if err != nil {
+		panic(err)
+	}
+
+	if err := m.Up(); err != nil {
+		if err != migrate.ErrNoChange {
+			panic(err)
+		}
+	}
+
 	e := echo.New()
 
 	e.Use(middleware.Recover())
