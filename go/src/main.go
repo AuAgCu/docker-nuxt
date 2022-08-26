@@ -2,6 +2,7 @@ package main
 
 import (
 	"main/config"
+	"main/entity"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -17,6 +18,7 @@ var e = createMux()
 
 func main() {
 	e.GET("/", articleIndex)
+	e.GET("/api/hello", hello)
 
 	e.Logger.Fatal(e.Start(":3001"))
 }
@@ -47,4 +49,8 @@ func createMux() *echo.Echo {
 
 func articleIndex(c echo.Context) error {
 	return c.String(http.StatusOK, "Hello, World!")
+}
+
+func hello(c echo.Context) error {
+	return c.JSON(http.StatusOK, entity.User{FirstName: "first", LastName: "last"})
 }
