@@ -24,9 +24,9 @@ var e = createMux()
 func main() {
 	// TODO: ここの初期化別の場所でやりたい、di containerとか使うのがいいかな？
 	userController := controller.UserControllerImpl{
-		userStore: &store.UserStoreImpl{
-			userService: &service.UserServiceImpl{
-				userRepository: &repository.UserRepositoryImpl{db: db.DB},
+		UserStore: &store.UserStoreImpl{
+			UserService: &service.UserServiceImpl{
+				UserRepository: &repository.UserRepositoryImpl{Db: db.DB},
 			},
 		},
 	}

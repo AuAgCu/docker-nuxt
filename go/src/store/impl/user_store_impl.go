@@ -1,14 +1,19 @@
 package store
 
 import (
+	"main/dto"
 	"main/entity"
 	service "main/service/interface"
 )
 
 type UserStoreImpl struct {
-	userService service.UserService
+	UserService service.UserService
 }
 
 func (f *UserStoreImpl) GetAllUser() []entity.User {
-	return f.userService.GetAllUser()
+	return f.UserService.GetAllUser()
+}
+
+func (u *UserStoreImpl) CreateUser(createUserDto dto.CreateUserDto) entity.User {
+	return u.UserService.CreateUser(createUserDto)
 }
