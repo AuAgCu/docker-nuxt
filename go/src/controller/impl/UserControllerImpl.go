@@ -7,10 +7,10 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type UserController struct {
-	userStore store.UserStore
+type UserControllerImpl struct {
+	UserStore store.UserStore
 }
 
-func (f *UserController) GetUsers(c echo.Context) error {
-	return c.JSON(http.StatusOK, f.userStore.GetAllUser())
+func (f *UserControllerImpl) GetUsers(c echo.Context) error {
+	return c.JSON(http.StatusOK, f.UserStore.GetAllUser())
 }

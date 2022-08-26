@@ -2,7 +2,12 @@ package main
 
 import (
 	"main/config"
+	controller "main/controller/impl"
 	"main/entity"
+	db "main/repository"
+	repository "main/repository/impl"
+	service "main/service/impl"
+	store "main/store/impl"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -17,8 +22,18 @@ import (
 var e = createMux()
 
 func main() {
+	// ここの初期化別の場所でやりたい、factoryとか使うのがいいかな？
+	userController := controller.UserControllerImpl{
+		UserStore: &store.UserStoreImpl{
+			UserStore: &service.UserServiceImpl{
+				UserRepository: &repository.UserRepositoryImpl{Db: db.DB},
+			},
+		},
+	}
+
 	e.GET("/", articleIndex)
 	e.GET("/api/hello", hello)
+	e.GET("/api/users", userController.GetUsers)
 
 	e.Logger.Fatal(e.Start(":3001"))
 }

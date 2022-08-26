@@ -6,9 +6,9 @@ import (
 )
 
 type UserStoreImpl struct {
-	userStore store.UserStore
+	UserStore store.UserStore
 }
 
 func (f *UserStoreImpl) GetAllUser() []entity.User {
-	return f.userStore.GetAllUser()
+	return f.UserStore.GetAllUser()
 }
