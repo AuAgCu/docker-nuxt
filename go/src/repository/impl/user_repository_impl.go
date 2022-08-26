@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"log"
 	"main/entity"
 
 	"gorm.io/gorm"
@@ -15,6 +16,7 @@ type UserRepositoryImpl struct {
 func (u *UserRepositoryImpl) GetAllUser() []entity.User {
 	var users []entity.User
 	u.Db.Table(table_name).Find(&users)
+	log.Println(users)
 	return users
 }
 

@@ -1,8 +1,8 @@
 <template>
     <div>
         <form @submit.prevent="submit">
-            <input placeholder="firstName" />
-            <input placeholder="lastName" />
+            <input v-model="firstName" placeholder="firstName" />
+            <input v-model="lastName" placeholder="lastName" />
             <button type="submit">送信</button>
         </form>
 
@@ -32,18 +32,13 @@ export default Vue.extend({
         return {
             firstName: "",
             lastName: "",
-            users: [
-                {
-                    firstName: "huga",
-                    lastName: "hoge",
-                }
-            ],
+            users: [],
         }
     },
     async created() {
         const res = await axios.get("/api/hello")
         const data = res.data
-        this.users.push(data)
+        this.users = res.data
     },
     methods: {
         async submit() {
@@ -51,9 +46,15 @@ export default Vue.extend({
                 firstName: this.firstName,
                 lastName: this.lastName,
             };
+            console.log(data)
 
-            const res = await axios.post("/api/user", data);
-            console.log(res);
+            try {
+                const res = await axios.post("/api/user", data);
+                console.log(res);
+            } catch (e) {
+                console.error(e)
+            }
+            
         },
     }
 })
