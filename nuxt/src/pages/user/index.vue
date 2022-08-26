@@ -52,7 +52,7 @@ export default Vue.extend({
                 lastName: this.lastName,
             };
 
-            const res = await axios.post("/api/users", data);
+            const res = await axios.post("/api/user", data);
             console.log(res);
         },
     }
