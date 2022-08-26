@@ -11,4 +11,4 @@ RUN apk update \
 WORKDIR /go/src
 COPY ./src /go/src
 
-EXPOSE 8080
+EXPOSE 3001

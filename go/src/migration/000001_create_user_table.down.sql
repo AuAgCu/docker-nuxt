@@ -1,1 +1,1 @@
-drop table hoge;
+drop table t_user;

@@ -3,7 +3,7 @@ services:
   nuxt:
     build: ./nuxt
     ports:
-      - 9001:3000
+      - 3000:3000
     volumes:
       - ./nuxt/src:/nuxt
     working_dir: /nuxt
@@ -16,7 +16,7 @@ services:
       - ./go/src:/go
     working_dir: /go
     ports:
-      - "8080:8080"
+      - "3001:3001"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
