@@ -33,7 +33,7 @@ func main() {
 
 	e.GET("/", articleIndex)
 	e.GET("/api/hello", hello)
-	e.POST("/api/user", userController.GetUsers)
+	e.GET("/api/user", userController.CreateUser)
 
 	e.Logger.Fatal(e.Start(":3001"))
 }
