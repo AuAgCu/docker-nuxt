@@ -21,6 +21,7 @@ func (u *UserRepositoryImpl) GetAllUser() []entity.User {
 }
 
 func (u *UserRepositoryImpl) CreateUser(user entity.User) entity.User {
+	log.Println(user)
 	u.Db.Table(table_name).Create(user)
 	return user
 }
