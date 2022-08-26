@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"main/config"
 	"net/http"
 
@@ -25,7 +24,7 @@ func main() {
 func createMux() *echo.Echo {
 	m, err := migrate.New(
 		"file://migration",
-		fmt.Sprintf("postgres://%v:%v@db:%v/%v?sslmode=disable", config.POSTGRES_USER, config.POSTGRES_PASSWORD, config.POSTGRES_PORT, config.POSTGRES_DB),
+		config.DB_URL,
 	)
 	if err != nil {
 		panic(err)
