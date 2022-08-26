@@ -27,18 +27,23 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios';
+
+export type User = {
+    firstName: string,
+    lastName: string,
+}
+
 export default Vue.extend({
     data() {
         return {
             firstName: "",
             lastName: "",
-            users: [],
+            users: Array() ,
         }
     },
     async created() {
         const res = await axios.get("/api/hello")
-        const data = res.data
-        this.users = res.data
+        this.users = res.data;
     },
     methods: {
         async submit() {
@@ -46,11 +51,13 @@ export default Vue.extend({
                 firstName: this.firstName,
                 lastName: this.lastName,
             };
-            console.log(data)
 
             try {
                 const res = await axios.post("/api/user", data);
-                console.log(res);
+                this.users.push(res.data);
+
+                this.firstName = "";
+                this.lastName = "";
             } catch (e) {
                 console.error(e)
             }
