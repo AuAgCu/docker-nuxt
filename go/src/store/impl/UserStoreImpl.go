@@ -1,9 +1,14 @@
 package store
 
-import "main/entity"
+import (
+	"main/entity"
+	store "main/store/interface"
+)
 
-type UserStoreImpl struct{}
+type UserStoreImpl struct {
+	userStore store.UserStore
+}
 
 func (f *UserStoreImpl) GetAllUser() []entity.User {
-	return []entity.User{}
+	return f.userStore.GetAllUser()
 }

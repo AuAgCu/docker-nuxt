@@ -1,9 +1,14 @@
 package service
 
-import "main/entity"
+import (
+	"main/entity"
+	repository "main/repository/interface"
+)
 
-type UserServiceImpl struct{}
+type UserServiceImpl struct {
+	userRepository repository.UserRepository
+}
 
 func (f *UserServiceImpl) GetAllUser() []entity.User {
-	return []entity.User{}
+	return f.userRepository.GetAllUser()
 }
