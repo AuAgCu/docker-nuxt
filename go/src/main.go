@@ -16,7 +16,7 @@ import (
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	_ "gorm.io/gorm"
 )
 
 var e = createMux()
@@ -33,7 +33,7 @@ func main() {
 
 	e.GET("/", articleIndex)
 	e.GET("/api/hello", hello)
-	e.GET("/api/users", userController.GetUsers)
+	e.POST("/api/user", userController.GetUsers)
 
 	e.Logger.Fatal(e.Start(":3001"))
 }

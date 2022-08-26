@@ -3,15 +3,15 @@ package repository
 import (
 	"main/config"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 var DB = gormConnect()
 
 func gormConnect() *gorm.DB {
-	DBMS := "postgres"
 	CONNECT := config.DB_URL
-	db, err := gorm.Open(DBMS, CONNECT)
+	db, err := gorm.Open(postgres.Open(CONNECT), &gorm.Config{})
 	if err != nil {
 		panic(err.Error())
 	}
