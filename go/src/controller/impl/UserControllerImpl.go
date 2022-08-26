@@ -8,9 +8,9 @@ import (
 )
 
 type UserControllerImpl struct {
-	UserStore store.UserStore
+	userStore store.UserStore
 }
 
 func (f *UserControllerImpl) GetUsers(c echo.Context) error {
-	return c.JSON(http.StatusOK, f.UserStore.GetAllUser())
+	return c.JSON(http.StatusOK, f.userStore.GetAllUser())
 }

@@ -6,9 +6,9 @@ import (
 )
 
 type UserServiceImpl struct {
-	UserRepository repository.UserRepository
+	userRepository repository.UserRepository
 }
 
 func (f *UserServiceImpl) GetAllUser() []entity.User {
-	return f.UserRepository.GetAllUser()
+	return f.userRepository.GetAllUser()
 }

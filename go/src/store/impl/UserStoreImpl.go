@@ -2,13 +2,13 @@ package store
 
 import (
 	"main/entity"
-	store "main/store/interface"
+	service "main/service/interface"
 )
 
 type UserStoreImpl struct {
-	UserStore store.UserStore
+	userService service.UserService
 }
 
 func (f *UserStoreImpl) GetAllUser() []entity.User {
-	return f.UserStore.GetAllUser()
+	return f.userService.GetAllUser()
 }

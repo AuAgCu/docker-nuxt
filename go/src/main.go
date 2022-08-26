@@ -22,11 +22,11 @@ import (
 var e = createMux()
 
 func main() {
-	// ここの初期化別の場所でやりたい、factoryとか使うのがいいかな？
+	// TODO: ここの初期化別の場所でやりたい、di containerとか使うのがいいかな？
 	userController := controller.UserControllerImpl{
-		UserStore: &store.UserStoreImpl{
-			UserStore: &service.UserServiceImpl{
-				UserRepository: &repository.UserRepositoryImpl{Db: db.DB},
+		userStore: &store.UserStoreImpl{
+			userService: &service.UserServiceImpl{
+				userRepository: &repository.UserRepositoryImpl{db: db.DB},
 			},
 		},
 	}
