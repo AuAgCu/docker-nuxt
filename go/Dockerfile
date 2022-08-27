@@ -12,4 +12,4 @@ RUN apk update \
 WORKDIR /go/src
 # COPY ./src /go/src
 
-EXPOSE 3001
+EXPOSE ${BACKEND_PORT}

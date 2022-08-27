@@ -8,6 +8,8 @@ services:
       - ./nuxt/src:/nuxt
     working_dir: /nuxt
     command: npm run dev
+    environment:
+      BASE_URL: ${BACKEND_HOST}
 
   go:
     build: ./go
@@ -23,6 +25,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_HOST: ${POSTGRES_HOST}
+      BACKEND_PORT: ${BACKEND_PORT}
       GOPATH: /go
 
   db:

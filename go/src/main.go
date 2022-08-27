@@ -29,7 +29,7 @@ func main() {
 	e.GET("/api/user", uc.GetUsers)
 	e.POST("/api/user", uc.CreateUser)
 
-	e.Logger.Fatal(e.Start(":3001"))
+	e.Logger.Fatal(e.Start(":" + config.PORT))
 }
 
 func initDiContainer() *container.DiContainer {

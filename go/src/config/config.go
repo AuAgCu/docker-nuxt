@@ -12,5 +12,7 @@ var (
 	POSTGRES_PORT     = os.Getenv("POSTGRES_PORT")
 	POSTGRES_HOST     = os.Getenv("POSTGRES_HOST")
 
+	PORT = os.Getenv("BACKEND_PORT")
+
 	DB_URL = fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable", POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DB)
 )
