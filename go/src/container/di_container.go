@@ -1,6 +1,7 @@
 package container
 
 import (
+	"log"
 	"reflect"
 )
 
@@ -29,27 +30,38 @@ func (d *DiContainer) Register(newFunc interface{}) {
 	}
 }
 
+type InterfaceFunc interface{}
+
+func (d *DiContainer) GetInstance(f InterfaceFunc) reflect.Value {
+	t := d.createInterfaceReflectType(f)
+	return d.getInstance(t)
+}
+
 // ちょっとトリッキーだけど、funcの引数を使ってinterface型のreflectTypeを作るためのメソッド
 // HACK: もっといい方法ない？
-func (d *DiContainer) CreateInterfaceReflectType(f func(arg interface{})) reflect.Type {
+func (d *DiContainer) createInterfaceReflectType(f InterfaceFunc) reflect.Type {
 	t := reflect.TypeOf(f)
 	if t.Kind() != reflect.Func {
 		return nil
 	}
 
-	out := getFuncOutPutFirstRes(t)
+	out := getFuncParams(t)[0]
 
 	return out
 }
 
 func (d *DiContainer) getInstance(t reflect.Type) reflect.Value {
 	info := d.containerInfo[t]
+	log.Println("t: ", t.Kind())
+
 	if info.instance != nil {
 		return *info.instance
 	}
 
 	var args []reflect.Value
 	for _, v := range info.args {
+		log.Println(v)
+		log.Println(v.Kind())
 		args = append(args, d.getInstance(v))
 	}
 

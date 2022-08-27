@@ -6,11 +6,15 @@ import (
 	"gorm.io/gorm"
 )
 
-const table_name = "t_user"
-
 type UserRepositoryImpl struct {
 	Db *gorm.DB
 }
+
+func NewUserRepository() UserRepository {
+	return &UserRepositoryImpl{Db: DB}
+}
+
+const table_name = "t_user"
 
 func (u *UserRepositoryImpl) GetAllUser() []entity.User {
 	var users []entity.User

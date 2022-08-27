@@ -10,6 +10,10 @@ type UserStoreImpl struct {
 	UserService service.UserService
 }
 
+func NewUserStore(userService service.UserService) UserStore {
+	return &UserStoreImpl{UserService: userService}
+}
+
 func (f *UserStoreImpl) GetAllUser() []entity.User {
 	return f.UserService.GetAllUser()
 }

@@ -3,8 +3,7 @@ package main
 import (
 	"main/config"
 	container "main/container"
-	controller "main/controller"
-	db "main/repository"
+	co "main/controller"
 	repository "main/repository"
 	service "main/service"
 	store "main/store"
@@ -15,33 +14,32 @@ import (
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
+	"gorm.io/gorm"
 	_ "gorm.io/gorm"
 )
 
 var e = createMux()
 
 func main() {
-	initDiContainer()
-	// TODO: ここの初期化別の場所でやりたい、di containerとか使うのがいいかな？
-	userController := controller.UserControllerImpl{
-		UserStore: &store.UserStoreImpl{
-			UserService: &service.UserServiceImpl{
-				UserRepository: &repository.UserRepositoryImpl{Db: db.DB},
-			},
-		},
-	}
+	repository.InitDb(config.DB_URL, &gorm.Config{})
+	c := initDiContainer()
 
-	e.GET("/api/hello", userController.GetUsers)
-	e.POST("/api/user", userController.CreateUser)
+	uc := c.GetInstance(func(arg co.UserController) {}).Interface().(co.UserController)
+
+	e.GET("/api/hello", uc.GetUsers)
+	e.POST("/api/user", uc.CreateUser)
 
 	e.Logger.Fatal(e.Start(":3001"))
 }
 
 func initDiContainer() *container.DiContainer {
-	container := container.NewDiContainer()
-	container.Register(controller.NewUserController)
+	c := container.NewDiContainer()
+	c.Register(co.NewUserController)
+	c.Register(store.NewUserStore)
+	c.Register(service.NewUserService)
+	c.Register(repository.NewUserRepository)
 
-	return container
+	return c
 }
 
 func createMux() *echo.Echo {
