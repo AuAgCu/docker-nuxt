@@ -5,9 +5,9 @@ import (
 	container "main/container"
 	controller "main/controller"
 	db "main/repository"
-	repository "main/repository/impl"
-	service "main/service/impl"
-	store "main/store/impl"
+	repository "main/repository"
+	service "main/service"
+	store "main/store"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"

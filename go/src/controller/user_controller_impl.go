@@ -3,7 +3,7 @@ package controller
 import (
 	"log"
 	"main/dto"
-	store "main/store/interface"
+	store "main/store"
 	"net/http"
 
 	"github.com/labstack/echo/v4"

@@ -3,7 +3,7 @@ package service
 import (
 	"main/dto"
 	"main/entity"
-	repository "main/repository/interface"
+	repository "main/repository"
 )
 
 type UserServiceImpl struct {

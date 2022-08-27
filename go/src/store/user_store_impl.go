@@ -3,7 +3,7 @@ package store
 import (
 	"main/dto"
 	"main/entity"
-	service "main/service/interface"
+	service "main/service"
 )
 
 type UserStoreImpl struct {
