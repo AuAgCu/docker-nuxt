@@ -1,13 +1,15 @@
 package main
 
 import (
+	"fmt"
 	"main/config"
 	container "main/container"
-	controller "main/controller/impl"
+	cImpl "main/controller/impl"
 	db "main/repository"
 	repository "main/repository/impl"
 	service "main/service/impl"
 	store "main/store/impl"
+	"reflect"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -21,8 +23,9 @@ import (
 var e = createMux()
 
 func main() {
+	initDiContainer()
 	// TODO: ここの初期化別の場所でやりたい、di containerとか使うのがいいかな？
-	userController := controller.UserControllerImpl{
+	userController := cImpl.UserControllerImpl{
 		UserStore: &store.UserStoreImpl{
 			UserService: &service.UserServiceImpl{
 				UserRepository: &repository.UserRepositoryImpl{Db: db.DB},
@@ -37,7 +40,21 @@ func main() {
 }
 
 func initDiContainer() *container.DiContainer {
-	return container.NewDiContainer()
+	c := container.NewDiContainer()
+
+	uc := cImpl.UserControllerImpl{
+		UserStore: &store.UserStoreImpl{
+			UserService: &service.UserServiceImpl{
+				UserRepository: &repository.UserRepositoryImpl{Db: db.DB},
+			},
+		},
+	}
+
+	v := reflect.ValueOf(uc)
+
+	fmt.Printf("v.Kind()=%v\n\n", v.Kind())
+	fmt.Printf("v.Elem()=%v\n\n", v.Elem())
+	return c
 }
 
 func createMux() *echo.Echo {

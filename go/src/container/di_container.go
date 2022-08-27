@@ -5,14 +5,14 @@ import (
 )
 
 type DiContainer struct {
-	containerInfo map[interface{}]containerInfo
+	containerInfo map[reflect.Type]containerInfo
 }
 
 func NewDiContainer() *DiContainer {
-	return &DiContainer{containerInfo: make(map[interface{}]containerInfo)}
+	return &DiContainer{containerInfo: make(map[reflect.Type]containerInfo)}
 }
 
-func (d *DiContainer) Register(interfaceType interface{}, newFunc interface{}) {
+func (d *DiContainer) Register(newFunc interface{}) {
 	t := reflect.TypeOf(newFunc)
 	if t.Kind() != reflect.Func {
 		return
@@ -20,16 +20,17 @@ func (d *DiContainer) Register(interfaceType interface{}, newFunc interface{}) {
 
 	value := reflect.ValueOf(newFunc)
 	args := getFuncParams(t)
+	out := getFuncOutPutFirstRes(t)
 
-	d.containerInfo[interfaceType] = containerInfo{
+	d.containerInfo[out] = containerInfo{
 		newFunc:  value,
 		args:     args,
 		instance: nil,
 	}
 }
 
-func (d *DiContainer) getInstance(interfaceType interface{}) reflect.Value {
-	info := d.containerInfo[interfaceType]
+func (d *DiContainer) getInstance(t reflect.Type) reflect.Value {
+	info := d.containerInfo[t]
 	if info.instance != nil {
 		return *info.instance
 	}
