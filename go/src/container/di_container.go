@@ -29,6 +29,19 @@ func (d *DiContainer) Register(newFunc interface{}) {
 	}
 }
 
+// ちょっとトリッキーだけど、funcの引数を使ってinterface型のreflectTypeを作るためのメソッド
+// HACK: もっといい方法ない？
+func (d *DiContainer) CreateInterfaceReflectType(f func(arg interface{})) reflect.Type {
+	t := reflect.TypeOf(f)
+	if t.Kind() != reflect.Func {
+		return nil
+	}
+
+	out := getFuncOutPutFirstRes(t)
+
+	return out
+}
+
 func (d *DiContainer) getInstance(t reflect.Type) reflect.Value {
 	info := d.containerInfo[t]
 	if info.instance != nil {

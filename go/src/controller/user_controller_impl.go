@@ -13,6 +13,10 @@ type UserControllerImpl struct {
 	UserStore store.UserStore
 }
 
+func NewUserController(userStore store.UserStore) UserController {
+	return &UserControllerImpl{UserStore: userStore}
+}
+
 func (f *UserControllerImpl) GetUsers(c echo.Context) error {
 	return c.JSON(http.StatusOK, f.UserStore.GetAllUser())
 }
