@@ -7,7 +7,7 @@ services:
     volumes:
       - ./nuxt/src:/nuxt
     working_dir: /nuxt
-    command: npm run dev
+    command: sh -c "npm install && npm run dev"
 
   go:
     build: ./go
