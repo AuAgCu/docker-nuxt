@@ -26,7 +26,7 @@ func main() {
 
 	uc := c.GetInstance(func(arg co.UserController) {}).Interface().(co.UserController)
 
-	e.GET("/api/hello", uc.GetUsers)
+	e.GET("/api/user", uc.GetUsers)
 	e.POST("/api/user", uc.CreateUser)
 
 	e.Logger.Fatal(e.Start(":3001"))

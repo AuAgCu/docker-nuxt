@@ -41,8 +41,8 @@ export default Vue.extend({
             users: Array() ,
         }
     },
-    async created() {
-        const res = await axios.get("/api/hello")
+    async mounted() {
+        const res = await axios.get("/api/user")
         this.users = res.data;
     },
     methods: {
