@@ -6,11 +6,11 @@ import (
 )
 
 type DiContainer struct {
-	containerInfo map[reflect.Type]containerInfo
+	containerInfo map[reflect.Type]*containerInfo
 }
 
 func NewDiContainer() *DiContainer {
-	return &DiContainer{containerInfo: make(map[reflect.Type]containerInfo)}
+	return &DiContainer{containerInfo: make(map[reflect.Type]*containerInfo)}
 }
 
 func (d *DiContainer) Register(newFunc interface{}) {
@@ -23,7 +23,7 @@ func (d *DiContainer) Register(newFunc interface{}) {
 	args := getFuncParams(t)
 	out := getFuncOutPutFirstRes(t)
 
-	d.containerInfo[out] = containerInfo{
+	d.containerInfo[out] = &containerInfo{
 		newFunc:  value,
 		args:     args,
 		instance: nil,
@@ -52,7 +52,9 @@ func (d *DiContainer) createInterfaceReflectType(f InterfaceFunc) reflect.Type {
 
 func (d *DiContainer) getInstance(t reflect.Type) reflect.Value {
 	info := d.containerInfo[t]
-	log.Println("t: ", t.Kind())
+	if info == nil {
+		log.Fatalf("%vはdi_containerに登録されていません", t)
+	}
 
 	if info.instance != nil {
 		return *info.instance
@@ -60,8 +62,6 @@ func (d *DiContainer) getInstance(t reflect.Type) reflect.Value {
 
 	var args []reflect.Value
 	for _, v := range info.args {
-		log.Println(v)
-		log.Println(v.Kind())
 		args = append(args, d.getInstance(v))
 	}
 
@@ -70,7 +70,9 @@ func (d *DiContainer) getInstance(t reflect.Type) reflect.Value {
 
 // 戻り値を返す
 func getFuncOutPutFirstRes(t reflect.Type) reflect.Type {
-	// TODO: 戻り値がない場合エラーを返すようにする
+	if t.NumOut() == 0 {
+		log.Fatalf("%vに戻り値は存在しません", t)
+	}
 	return t.Out(0)
 }
 
