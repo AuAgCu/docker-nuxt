@@ -2,6 +2,7 @@ package main
 
 import (
 	"main/config"
+	container "main/container"
 	controller "main/controller/impl"
 	db "main/repository"
 	repository "main/repository/impl"
@@ -33,6 +34,10 @@ func main() {
 	e.POST("/api/user", userController.CreateUser)
 
 	e.Logger.Fatal(e.Start(":3001"))
+}
+
+func initDiContainer() *container.DiContainer {
+	return container.NewDiContainer()
 }
 
 func createMux() *echo.Echo {

@@ -19,7 +19,6 @@ func (f *UserControllerImpl) GetUsers(c echo.Context) error {
 
 func (f *UserControllerImpl) CreateUser(c echo.Context) error {
 	var userDto dto.CreateUserDto
-	log.Print("huga")
 	if e := c.Bind(&userDto); e != nil {
 		log.Println(e)
 		return e
