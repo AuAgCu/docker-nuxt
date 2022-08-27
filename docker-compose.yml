@@ -3,8 +3,41 @@ services:
   nuxt:
     build: ./nuxt
     ports:
-      - 9001:3000
+      - 3000:3000
     volumes:
       - ./nuxt/src:/nuxt
     working_dir: /nuxt
     command: npm run dev
+
+  go:
+    build: ./go
+    # command: go run main.go
+    command: air -c .air.toml
+    volumes:
+      - ./go/src:/go_api
+    working_dir: /go_api
+    ports:
+      - "3001:3001"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      BACKEND_PORT: ${BACKEND_PORT}
+      GOPATH: /go
+
+  db:
+    image: postgres:14.2
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_INITDB_ARGS: '--encoding=UTF-8'
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5430:5432
+      
+volumes:
+  pgdata:
