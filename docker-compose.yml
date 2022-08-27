@@ -8,8 +8,6 @@ services:
       - ./nuxt/src:/nuxt
     working_dir: /nuxt
     command: npm run dev
-    environment:
-      BASE_URL: ${BACKEND_HOST}
 
   go:
     build: ./go
