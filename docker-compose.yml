@@ -11,10 +11,11 @@ services:
 
   go:
     build: ./go
-    command: go run main.go
+    # command: go run main.go
+    command: air -c .air.toml
     volumes:
-      - ./go/src:/go
-    working_dir: /go
+      - ./go/src:/go_api
+    working_dir: /go_api
     ports:
       - "3001:3001"
     environment:
@@ -22,6 +23,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_HOST: ${POSTGRES_HOST}
+      GOPATH: /go
 
   db:
     image: postgres:14.2

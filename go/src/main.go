@@ -3,12 +3,10 @@ package main
 import (
 	"main/config"
 	controller "main/controller/impl"
-	"main/entity"
 	db "main/repository"
 	repository "main/repository/impl"
 	service "main/service/impl"
 	store "main/store/impl"
-	"net/http"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -31,7 +29,6 @@ func main() {
 		},
 	}
 
-	e.GET("/", articleIndex)
 	e.GET("/api/hello", userController.GetUsers)
 	e.POST("/api/user", userController.CreateUser)
 
@@ -60,12 +57,4 @@ func createMux() *echo.Echo {
 	e.Use(middleware.Gzip())
 
 	return e
-}
-
-func articleIndex(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello, World!")
-}
-
-func hello(c echo.Context) error {
-	return c.JSON(http.StatusOK, entity.User{FirstName: "first", LastName: "last"})
 }
