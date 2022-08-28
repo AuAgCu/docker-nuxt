@@ -34,16 +34,18 @@ export type User = {
 }
 
 export default Vue.extend({
+    async asyncData({ app }) {
+        const res = await app.$axios.$get("/api/user");
+        return {
+            users: res
+        }
+    },
     data() {
         return {
             firstName: "",
             lastName: "",
             users: Array() ,
         }
-    },
-    async mounted() {
-        const res = await axios.get("/api/user")
-        this.users = res.data;
     },
     methods: {
         async submit() {
