@@ -7,5 +7,6 @@ RUN apk update && \
     apk add git && \
     npm install -g npm@latest nuxi nuxt3
 
+EXPOSE 24678
 EXPOSE 3000
 ENV HOST 0.0.0.0
