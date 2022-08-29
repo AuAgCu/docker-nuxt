@@ -1,0 +1,8 @@
+import type { IncomingMessage, ServerResponse, } from "http";
+import http from "http";
+import httpProxy from "http-proxy";
+
+export default async (req: IncomingMessage, res: ServerResponse) => {
+  const proxy = httpProxy.createProxyServer({});
+  proxy.web(req, res, { target: 'http://go:3001' });
+}
