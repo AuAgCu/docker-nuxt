@@ -1,12 +1,13 @@
 <script setup>
-    const { data: users } = await useFetch('/api/user');
+    const { data: users } = await useFetch('http:/go:3001/api/user');
+    console.log(users);
 </script>
 
 <template>
     <div>
         <form @submit.prevent="submit">
-            <input v-model="firstName" placeholder="firstName" />
-            <input v-model="lastName" placeholder="lastName" />
+            <!-- <input v-model="firstName" placeholder="firstName" />
+            <input v-model="lastName" placeholder="lastName" /> -->
             <button type="submit">送信</button>
         </form>
 
