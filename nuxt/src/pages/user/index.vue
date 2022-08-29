@@ -1,9 +1,5 @@
 <script setup>
     const { data: users } = await useFetch('http://localhost:3000/api/user');
-    // console.log(users);
-    // const apiFetch = $fetch.create({ baseURL: 'http://localhost:3000' })
-
-    // const {data: users} = await useFetch("/apfi/user");
     console.log(users)
 </script>
 
