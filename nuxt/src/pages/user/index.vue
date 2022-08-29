@@ -1,6 +1,5 @@
 <script setup>
     const { data: users } = await useFetch('http://localhost:3000/api/user');
-    console.log(users)
 </script>
 
 <template>
