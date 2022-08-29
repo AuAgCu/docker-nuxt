@@ -1,3 +1,7 @@
+<script setup>
+    const { data: users } = await useFetch('/api/user')
+</script>
+
 <template>
     <div>
         <form @submit.prevent="submit">
@@ -23,46 +27,3 @@
         </table>
     </div>
 </template>
-
-<script lang="ts">
-import Vue from 'vue'
-import axios from 'axios';
-
-export type User = {
-    firstName: string,
-    lastName: string,
-}
-
-export default Vue.extend({
-    data() {
-        return {
-            firstName: "",
-            lastName: "",
-            users: Array() ,
-        }
-    },
-    async mounted() {
-        const res = await axios.get("/api/user")
-        this.users = res.data;
-    },
-    methods: {
-        async submit() {
-            const data = {
-                firstName: this.firstName,
-                lastName: this.lastName,
-            };
-
-            try {
-                const res = await axios.post("/api/user", data);
-                this.users.push(res.data);
-
-                this.firstName = "";
-                this.lastName = "";
-            } catch (e) {
-                console.error(e)
-            }
-            
-        },
-    }
-})
-</script>
