@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from "@vue/reactivity";
 
-const { data: fetchUsers } = await useFetch("http://localhost:3000/api/user");
+const { data: fetchUsers } = await useFetch("/api/user");
+console.log(fetchUsers)
 const firstName = ref("");
 const lastName = ref("");
 const users = ref(fetchUsers);
