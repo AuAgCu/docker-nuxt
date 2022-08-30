@@ -1,24 +1,30 @@
 <script setup>
 import { ref } from "@vue/reactivity";
 
-const { data: users } = await useFetch("http://localhost:3000/api/user");
+const { data: fetchUsers } = await useFetch("http://localhost:3000/api/user");
 const firstName = ref("");
 const lastName = ref("");
-const createUser = () => {
-  const data = {
+const users = ref(fetchUsers);
+
+const createUser = async () => {
+  const postData = {
     firstName: firstName.value,
     lastName: lastName.value,
   };
 
   try {
-    const {data: user} = useFetch("/api/user", {
+    const user = await $fetch("/api/user", {
         method: "POST",
-        body: data,
+        body: postData,
     });
-    console.log(user);
+    firstName.value = "";
+    lastName.value = "";
+    
+    users.value.push(user);
   } catch (e) {
     console.error(e);
   }
+
 };
 
 </script>
