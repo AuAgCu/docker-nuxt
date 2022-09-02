@@ -26,9 +26,7 @@ const createUser = async () => {
   }
 
 };
-
 </script>
-
 <template>
   <div>
     <form @submit.prevent="createUser">

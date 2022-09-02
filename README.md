@@ -7,8 +7,6 @@
 1. env.sampleファイルを.envにリネーム(docker-nuxt直下とnuxt/srcの2箇所ある)
 1. ビルド  
   `$ docker-compose build`
-1. npm install  
-  `$ docker-compose run --rm nuxt npm install`
 1. 起動  
   `$ docker-compose up`
 1. ブラウザからlocalhost:3001にアクセス  
