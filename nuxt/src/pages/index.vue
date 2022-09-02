@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
     // const { data: hoge } = useFetch("/api/huga/nyan");
     // console.log(hoge);
     // console.log(hoge.value)
