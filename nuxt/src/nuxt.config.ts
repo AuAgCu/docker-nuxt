@@ -12,11 +12,14 @@ export default defineNuxtConfig({
         server: {
             proxy: {
                 "/api/": {
-                    target: "http://go:3001/",
+                    target: process.env.BASE_URL,
                     secure: false
                 }
             }
         }
+    },
+    publicRuntimeConfig: {
+        BASE_URL: process.env.BASE_URL,
     },
     // modules: ['@nuxtjs-alt/proxy',],
     // proxy: {
