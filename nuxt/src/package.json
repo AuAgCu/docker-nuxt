@@ -13,6 +13,8 @@
   "dependencies": {
     "@types/request": "^2.48.8",
     "axios": "^0.27.2",
-    "http-proxy": "^1.18.1"
+    "http-proxy": "^1.18.1",
+    "nuxt-vite": "^0.3.5",
+    "vite": "^3.0.9"
   }
 }
