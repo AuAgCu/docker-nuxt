@@ -1,9 +1,12 @@
-FROM node:16.13.2-alpine
+FROM node:lts-alpine
 
-EXPOSE 3000
-ENV HOST 0.0.0.0
-
+RUN mkdir ./src
 # コマンド実行
 RUN apk update && \
+    apk upgrade && \
     apk add git && \
-    npm install -g @vue/cli nuxt create-nuxt-app
+    npm install -g npm@latest nuxi nuxt3
+
+EXPOSE 24678
+EXPOSE 3000
+ENV HOST 0.0.0.0
