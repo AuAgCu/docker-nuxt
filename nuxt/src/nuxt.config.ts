@@ -3,7 +3,7 @@ import { defineNuxtConfig } from 'nuxt'
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
     // TODO: SSRをONにするとプロキシがうまく動かない
-    ssr: false,
+    ssr: true,
     vite: {
         logLevel: 'error',
         ssr: {
