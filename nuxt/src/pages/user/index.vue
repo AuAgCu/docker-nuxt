@@ -2,7 +2,7 @@
 import { ref } from "@vue/reactivity";
 
 const { data: fetchUsers } = await useFetch("/api/user");
-console.log(fetchUsers)
+// console.log(fetchUsers)
 const firstName = ref("");
 const lastName = ref("");
 const users = ref(fetchUsers);
