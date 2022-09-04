@@ -14,6 +14,8 @@
     "@nuxtjs-alt/proxy": "^1.3.1",
     "@types/request": "^2.48.8",
     "axios": "^0.27.2",
-    "http-proxy": "^1.18.1"
+    "http-proxy": "^1.18.1",
+    "nuxt-proxy": "^0.2.4",
+    "vite": "^3.0.9"
   }
 }
