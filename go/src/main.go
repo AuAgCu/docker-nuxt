@@ -1,12 +1,14 @@
 package main
 
 import (
+	"log"
 	"main/config"
 	container "main/container"
 	co "main/controller"
 	repository "main/repository"
 	service "main/service"
 	store "main/store"
+	"strings"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -29,7 +31,17 @@ func main() {
 	e.GET("/api/user", uc.GetUsers)
 	e.POST("/api/user", uc.CreateUser)
 
+	e.GET("/api/jwt", GetJwtToken)
+
 	e.Logger.Fatal(e.Start(":" + config.PORT))
+}
+
+// テスト用メソッド、後で消す
+func GetJwtToken(c echo.Context) error {
+	authHeader := c.Request().Header.Get("Authorization")
+	jwtToken := strings.Replace(authHeader, "Bearer ", "", 1)
+	log.Println(jwtToken)
+	return nil
 }
 
 func initDiContainer() *container.DiContainer {

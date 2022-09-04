@@ -1,5 +1,7 @@
 <script setup>
-    // const { data: hoge } = useFetch("/api/huga/nyan");
+
+    const config = useRuntimeConfig();
+    const { data: hoge } = $fetch(`${config.BASE_URL}/api/jwt`);
     // console.log(hoge);
     // console.log(hoge.value)
 </script>
