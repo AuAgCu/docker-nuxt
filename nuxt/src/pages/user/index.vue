@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from "@vue/reactivity";
-const { data: fetchUsers } = await useFetch(useNuxtApp().$baseUrl("/api/user"));
 
+const config = useRuntimeConfig();
+const { data: fetchUsers } = await useFetch(`${config.BASE_URL}/api/user`);
 const firstName = ref("");
 const lastName = ref("");
 const users = ref(fetchUsers);
